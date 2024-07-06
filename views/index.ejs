@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>Members Only</title>
+  <meta name='viewport' , content='width=device-width, initial-scale=1' />
+  <link rel="stylesheet" , href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" ,
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" , crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ,
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" ,
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" ,
+    integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" ,
+    crossorigin="anonymous"></script>
+  <link rel='stylesheet' , href='/stylesheets/style.css' />
 </head>
+
 <body>
-  <% if (user) {%>
-    <h1>WELCOME BACK <%= user.username %></h1>
-    <a href="/log-out">LOG OUT</a>
-  <% } else { %>
-    <h1>please log in</h1>
-    <form action="/log-in" method="POST">
-      <label for="username">Username</label>
-      <input name="username" placeholder="username" type="text" />
-      <label for="password">Password</label>
-      <input name="password" type="password" />
-      <button>Log In</button>
-    </form>
-  <%}%>
+  <div class="d-flex flex-column text-center bg-primary m-4 p-4 rounded text-white" style="gap: 1em;">
+    <h1>Members Only</h1>
+    <h5 class="text-wrap">A place to post anonymous messages.</h5>
+    <div class="d-flex justify-content-around">
+      <a href="/login">
+        <button class="btn btn-secondary text-uppercase">log in</button>
+      </a>
+      <a href="/signup">
+        <button class="btn btn-secondary text-uppercase">sign up</button>
+      </a>
+    </div>
+  </div>
 </body>
+
 </html>
