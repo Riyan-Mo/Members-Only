@@ -17,9 +17,33 @@
 </head>
 
 <body>
-    <div class="d-flex flex-column text-center bg-primary m-4 p-4 rounded text-white" style="gap: 1em;">
-        <h1> Welcome back <%= user.username %>
+    <div class="d-flex flex-column m-4" style="gap: 1em;">
+        <h1 class="text-center bg-primary text-white p-4 rounded"> Members only
         </h1>
+        <div>
+            <%messages.forEach(message=> {%>
+                <div>
+                    <p>
+                        <%=user.isMember? message.user: "Anonymous" %>
+                    </p>
+                </div>
+                <%})%>;
+        </div>
+
+        <div class="row justify-content-around">
+            <%if(user.isMember){%>
+                <button type="button" class="btn btn-success">Member</button>
+                <%} else{%>
+                    <button type="button" class="btn btn-danger">Member</button>
+                    <%}%>
+                        <%if(user.isAdmin){%>
+                            <button type="button" class="btn btn-success">Admin</button>
+                            <%} else{%>
+                                <button type="button" class="btn btn-danger">Admin</button>
+                                <%}%>
+        </div>
+
+        <a href="/logout" class="align-self-center"><button class="btn btn-danger">Logout</button></a>
     </div>
 </body>
 
