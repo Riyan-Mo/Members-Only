@@ -42,14 +42,14 @@ app.post(
   loginController.post,
   passport.authenticate("local", {
     successRedirect: "/home",
-    failureRedirect: "/login",
+    failureRedirect: "/login/?error=CredentialsIncorrect",
   })
 );
 
 app.get("/logout", (req, res, next) => {
   req.logOut((err) => {
     console.log(err);
-    return res.redirect("/login");
+    return res.redirect("/");
   });
 });
 

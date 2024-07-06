@@ -13,9 +13,11 @@ function passportInit() {
             message: "User does not exist in database.",
           });
         }
-        const isPasswordCorrect = bcrypt.compare(password, user.passwordHash);
-        if (isPasswordCorrect) {
+        const match = await bcrypt.compare(password, user.passwordHash);
+        if (match) {
           return done(null, user);
+        } else {
+          return done(null, false, { message: "Password is wrong" });
         }
       } catch (e) {
         return done(null, false, { message: "Username is not valid." });

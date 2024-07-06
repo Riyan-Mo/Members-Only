@@ -1,6 +1,4 @@
 require("dotenv").config();
-const User = require("../models/User");
-const bcrypt = require("bcryptjs");
 const { validationResult, body } = require("express-validator");
 
 exports.post = [
@@ -21,4 +19,11 @@ exports.post = [
   },
 ];
 
-exports.get = (req, res) => res.render("login-form", { errors: [] });
+exports.get = (req, res) => {
+  const errors = [];
+  const { error } = req.query;
+  if (error && error === "CredentialsIncorrect") {
+    errors.push({ msg: "Incorrect username or password entered" });
+  }
+  res.render("login-form", { errors });
+};

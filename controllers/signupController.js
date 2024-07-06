@@ -24,7 +24,6 @@ exports.post = [
     .isString({ min: 8 }),
   async (req, res, next) => {
     const { errors } = validationResult(req);
-    console.log(errors);
     if (errors.length !== 0) {
       return res.render("sign-up-form", { errors: errors });
     }
