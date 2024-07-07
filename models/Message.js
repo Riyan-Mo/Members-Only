@@ -9,7 +9,7 @@ const messageSchema = new Schema({
   title: {
     type: String,
     required: true,
-    minLength: 5,
+    minLength: 2,
   },
   timeStamp: {
     type: String,
@@ -18,7 +18,7 @@ const messageSchema = new Schema({
   message: {
     type: String,
     required: true,
-    minLength: 5,
+    minLength: 2,
   },
 });
 
