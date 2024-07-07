@@ -59,11 +59,15 @@
                     <form action="/message" method="post" class="form d-flex flex-column ">
                         <div class="form-group">
                             <input type="text" name="title" id="title" class="form-control" placeholder="Title">
+                            <small id="title" class="form-text text-muted">Title should be atleast 2 characters
+                                long</small>
                         </div>
 
                         <div>
                             <textarea type="text" name="message" id="message" class="form-control" style="flex:1"
                                 placeholder="Message"></textarea>
+                            <small id="message" class="form-text text-muted">Message should be atleast 2 characters
+                                long</small>
                         </div>
 
                         <button type="submit" class="btn btn-success">Send</button>
