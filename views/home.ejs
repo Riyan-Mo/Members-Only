@@ -20,27 +20,26 @@
     <div class="d-flex flex-column m-4" style="gap: 1em;">
         <h1 class="text-center bg-primary text-white p-4 rounded"> Members only
         </h1>
-        <div>
-            <%messages.forEach(message=> {%>
-                <div>
-                    <p>
-                        <%=user.isMember? message.user: "Anonymous" %>
-                    </p>
-                </div>
-                <%})%>;
-        </div>
-
         <div class="row justify-content-around">
             <%if(user.isMember){%>
-                <button type="button" class="btn btn-success">Member</button>
-                <%} else{%>
-                    <button type="button" class="btn btn-danger">Member</button>
+                <p>Member: <%=user.isMember?"✅": "❌" %>
+                </p>
+                <%}if(user.isAdmin){%>
+                    <p>Admin: <%=user.isAdmin?"✅": "❌" %>
+                    </p>
                     <%}%>
-                        <%if(user.isAdmin){%>
-                            <button type="button" class="btn btn-success">Admin</button>
-                            <%} else{%>
-                                <button type="button" class="btn btn-danger">Admin</button>
-                                <%}%>
+        </div>
+        <div class="border border-primary" style="height: 70vh;">
+            <% if (messages.length===0) { %>
+                <p class="text-center">No messages to show</p>
+                <% }else{ %>
+                    <%messages.forEach(message=> {%>
+                        <div>
+                            <p>
+                                <%=user.isMember? message.user: "Anonymous" %>
+                            </p>
+                        </div>
+                        <%})}%>
         </div>
 
         <a href="/logout" class="align-self-center"><button class="btn btn-danger">Logout</button></a>

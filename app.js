@@ -55,8 +55,12 @@ app.get("/logout", (req, res, next) => {
 
 async function connect() {
   const mongoDb = process.env.MONGODB_URI;
-  await mongoose.connect(mongoDb);
-  console.log("Connected to mongo");
+  try {
+    await mongoose.connect(mongoDb);
+    console.log("Connected to mongodb");
+  } catch (e) {
+    console.log(e);
+  }
 }
 connect();
 
