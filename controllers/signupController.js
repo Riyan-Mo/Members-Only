@@ -37,13 +37,14 @@ exports.post = [
     } = req.body;
 
     bcrypt.hash(password, 10, async (err, passwordHash) => {
+      const isAdmin = adminPassword === process.env.adminPass;
       const user = new User({
         firstName,
         lastName,
         username,
         passwordHash,
-        isMember: memberPassword === process.env.memberPass,
-        isAdmin: adminPassword === process.env.adminPass,
+        isMember: memberPassword === process.env.memberPass || isAdmin,
+        isAdmin,
       });
       try {
         await user.save();

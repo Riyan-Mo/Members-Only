@@ -38,8 +38,8 @@
                                     <%=message.title%>
                                 </h5>
                                 <h6 class="card-subtitle mb-2 text-muted">
-                                    <%=user.isMember?`${message.user.fullName} ${message.timeStamp}`: "Anonymous user"
-                                        %>
+                                    <%=(user.isMember||user.isAdmin)?`${message.user.fullName}
+                                        ${message.timeStamp}`: "Anonymous user" %>
                                 </h6>
                                 <p class="card-text">
                                     <%=message.message%>
