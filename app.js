@@ -7,8 +7,8 @@ const MongoStore = require("connect-mongo");
 const passportInit = require("./passportConfig");
 const signupController = require("./controllers/signupController");
 const loginController = require("./controllers/loginController");
-const homeController = require("./controllers/homeController");
-const { isAuth, isLoggedIn } = require("./middlewares/authMiddleware");
+const messageController = require("./controllers/messageController");
+const { isAuth, isLoggedIn, isAdmin } = require("./middlewares/authMiddleware");
 
 const passport = passportInit();
 
@@ -29,7 +29,11 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/", isLoggedIn, (req, res) => res.render("index"));
 
-app.get("/home", isAuth, homeController.get);
+app.get("/message", isAuth, messageController.getMessages);
+
+app.post("/message", isAuth, messageController.postMessage);
+
+app.post("/message/delete", isAuth, isAdmin, messageController.deleteMessage);
 
 app.get("/signup", isLoggedIn, signupController.get);
 
@@ -41,7 +45,7 @@ app.post(
   "/login",
   loginController.post,
   passport.authenticate("local", {
-    successRedirect: "/home",
+    successRedirect: "/message",
     failureRedirect: "/login/?error=CredentialsIncorrect",
   })
 );

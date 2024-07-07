@@ -21,28 +21,55 @@
         <h1 class="text-center bg-primary text-white p-4 rounded"> Members only
         </h1>
         <div class="row justify-content-around">
-            <%if(user.isMember){%>
-                <p>Member: <%=user.isMember?"✅": "❌" %>
-                </p>
-                <%}if(user.isAdmin){%>
-                    <p>Admin: <%=user.isAdmin?"✅": "❌" %>
-                    </p>
-                    <%}%>
+            <p>Member: <%=user.isMember?"✅": "❌" %>
+            </p>
+            <p>Admin: <%=user.isAdmin?"✅": "❌" %>
+            </p>
         </div>
-        <div class="border border-primary" style="height: 70vh;">
-            <% if (messages.length===0) { %>
-                <p class="text-center">No messages to show</p>
-                <% }else{ %>
+        <% if (messages.length===0) { %>
+            <p class="text-center">No messages to show</p>
+            <% }else{ %>
+                <div class="border border-primary rounded"
+                    style="padding: 1em; max-height: 70vh; overflow-y: scroll; display: flex; flex-direction: column; gap: 1em;">
                     <%messages.forEach(message=> {%>
-                        <div>
-                            <p>
-                                <%=user.isMember? message.user: "Anonymous" %>
-                            </p>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%=message.title%>
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <%=user.isMember?`${message.user.fullName} ${message.timeStamp}`: "Anonymous user"
+                                        %>
+                                </h6>
+                                <p class="card-text">
+                                    <%=message.message%>
+                                </p>
+                                <% if (user.isAdmin) { %>
+                                    <form action="/message/delete" method="post">
+                                        <input type="hidden" value=<%=message._id%> name="id">
+                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                    </form>
+                                    <% } %>
+                            </div>
                         </div>
-                        <%})}%>
-        </div>
+                        <% })%>
+                </div>
+                <%}%>
 
-        <a href="/logout" class="align-self-center"><button class="btn btn-danger">Logout</button></a>
+                    <form action="/message" method="post" class="form d-flex flex-column ">
+                        <div class="form-group">
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Title">
+                        </div>
+
+                        <div>
+                            <textarea type="text" name="message" id="message" class="form-control" style="flex:1"
+                                placeholder="Message"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Send</button>
+                    </form>
+
+                    <a href="/logout" class="align-self-center"><button class="btn btn-danger">Logout</button></a>
     </div>
 </body>
 
