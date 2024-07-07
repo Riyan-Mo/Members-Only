@@ -4,7 +4,7 @@ const { validationResult, body } = require("express-validator");
 
 exports.getMessages = async (req, res) => {
   const messages = await Message.find().populate("user").exec();
-  res.render("home", { user: req.user, messages: messages });
+  res.render("message", { user: req.user, messages: messages });
 };
 
 function timeStampExtractor(Date) {
